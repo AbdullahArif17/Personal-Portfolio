@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Code2 } from "lucide-react";
+import { Code2, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const techLogos = [
@@ -139,6 +139,21 @@ export default function Hero() {
           </div>
 
           {/* Animated Stats Bar — unique differentiator */}
+          <motion.a
+            href="/Abdullah_Arif_CV.pdf"
+            download="Abdullah_Arif_CV.pdf"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-widest text-black transition-colors duration-300 hover:bg-violet-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            aria-label="Download Abdullah Arif's CV"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Download CV
+          </motion.a>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

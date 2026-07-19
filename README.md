@@ -14,6 +14,7 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwi
 - **Accessibility**: ARIA labels and keyboard navigation
 - **Theme Toggle**: Light/Dark mode support
 - **Analytics**: Google Analytics integration
+- **AI Portfolio Chat**: Session-based RAG assistant grounded in CV and live GitHub data with Upstash Vector
 
 ## 🚀 Tech Stack
 
@@ -56,6 +57,9 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwi
 
    # Google Analytics (optional)
    NEXT_PUBLIC_GA_ID=your_google_analytics_id
+
+   # Server-only FastAPI chat backend URL
+   PORTFOLIO_CHAT_API_URL=https://your-portfolio-api.vercel.app
    ```
 
 4. **Set up Sanity CMS**
@@ -93,6 +97,10 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwi
 1. Create a Google Analytics 4 property
 2. Get your measurement ID
 3. Add it to your environment variables
+
+### AI Portfolio Chat
+
+The floating chat widget sends requests only to the local `/api/chat` route, which proxies to the FastAPI service so the backend URL is never read by client-side code. Copy `.env.example` to `.env.local`, set `PORTFOLIO_CHAT_API_URL`, and see `backend/README.md` for Upstash Vector, Gemini, ingestion, and Vercel deployment instructions. `NEXT_PUBLIC_CHAT_API_URL` remains supported as a legacy fallback, but the server-only variable is preferred.
 
 ## 📁 Project Structure
 

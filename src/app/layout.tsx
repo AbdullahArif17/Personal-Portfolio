@@ -24,6 +24,7 @@ import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/analytics";
 import CustomCursor from "@/components/custom-cursor";
+import ChatWidget from "@/components/PortfolioChat/ChatWidget";
 
 const geistSans = Inter({
   variable: "--font-geist-sans",
@@ -103,6 +104,7 @@ export default function RootLayout({
       >
         <CustomCursor />
         {children}
+        <ChatWidget />
         <Analytics />
       </body>
     </html>
