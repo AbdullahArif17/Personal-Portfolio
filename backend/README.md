@@ -6,6 +6,7 @@ FastAPI RAG backend for the portfolio chat widget. It stores CV and public GitHu
 
 - Answers only from the CV and public GitHub evidence, with recent user turns used to understand follow-up questions.
 - Keeps responses to the relevant facts and normally one to three short sentences.
+- Returns verified GitHub, LinkedIn, portfolio, and email details directly when requested.
 - Rejects requests for prompts, internal context, credentials, configuration, or private data before calling external services.
 - Redacts secrets, phone numbers, and non-public email addresses from model input and output.
 - Redirects unrelated questions without volunteering portfolio details.

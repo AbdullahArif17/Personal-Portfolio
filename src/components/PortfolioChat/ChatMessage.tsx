@@ -5,6 +5,46 @@ interface ChatMessageProps {
   message: PortfolioChatMessage
 }
 
+const LINK_PATTERN = /(https?:\/\/[^\s<]+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi
+
+function LinkedMessageContent({ content }: { content: string }) {
+  return content.split(LINK_PATTERN).map((part, index) => {
+    const urlMatch = part.match(/^(https?:\/\/[^\s]+?)([.,!?;:)]*)$/i)
+    const emailMatch = part.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)
+
+    if (urlMatch) {
+      const [, url, punctuation] = urlMatch
+      return (
+        <span key={`${url}-${index}`}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-violet-300 underline decoration-violet-400/50 underline-offset-2 transition-colors hover:text-violet-200"
+          >
+            {url}
+          </a>
+          {punctuation}
+        </span>
+      )
+    }
+
+    if (emailMatch) {
+      return (
+        <a
+          key={`${part}-${index}`}
+          href={`mailto:${part}`}
+          className="font-medium text-violet-300 underline decoration-violet-400/50 underline-offset-2 transition-colors hover:text-violet-200"
+        >
+          {part}
+        </a>
+      )
+    }
+
+    return part
+  })
+}
+
 export default function ChatMessage({ message }: ChatMessageProps) {
   const isAssistant = message.role === "assistant"
 
@@ -25,7 +65,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             : "rounded-2xl rounded-br-sm bg-violet-600 text-white"
         }`}
       >
-        {message.content}
+        <LinkedMessageContent content={message.content} />
       </div>
 
       {!isAssistant && (

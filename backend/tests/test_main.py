@@ -4,7 +4,7 @@ import unittest
 
 from fastapi.testclient import TestClient
 
-from gemini_client import PRIVACY_REPLY
+from gemini_client import PRIVACY_REPLY, PUBLIC_GITHUB_URL, PUBLIC_LINKEDIN_URL
 from main import HistoryMessage, _build_search_query, app
 
 
@@ -35,6 +35,17 @@ class ChatBehaviorTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"reply": PRIVACY_REPLY})
+
+    def test_contact_links_never_require_external_services(self) -> None:
+        response = TestClient(app).post(
+            "/chat",
+            json={"message": "Share GitHub and LinkedIn links", "history": []},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        reply = response.json()["reply"]
+        self.assertIn(PUBLIC_GITHUB_URL, reply)
+        self.assertIn(PUBLIC_LINKEDIN_URL, reply)
 
 
 if __name__ == "__main__":

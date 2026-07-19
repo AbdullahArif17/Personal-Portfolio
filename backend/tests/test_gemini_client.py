@@ -5,8 +5,11 @@ import unittest
 from gemini_client import (
     MAX_REPLY_CHARS,
     PRIVACY_REPLY,
+    PUBLIC_GITHUB_URL,
+    PUBLIC_LINKEDIN_URL,
     _build_prompt,
     _clean_reply,
+    get_contact_reply,
     get_guardrail_reply,
 )
 
@@ -28,6 +31,18 @@ class GeminiGuardrailTests(unittest.TestCase):
     def test_normal_portfolio_question_is_not_blocked(self) -> None:
         self.assertIsNone(
             get_guardrail_reply("Which APIs and backend tools has Abdullah used?")
+        )
+
+    def test_verified_social_links_are_returned_without_generation(self) -> None:
+        reply = get_contact_reply("Can I get his GitHub and LinkedIn URLs?")
+
+        self.assertIsNotNone(reply)
+        self.assertIn(PUBLIC_GITHUB_URL, reply or "")
+        self.assertIn(PUBLIC_LINKEDIN_URL, reply or "")
+
+    def test_github_project_question_still_uses_rag(self) -> None:
+        self.assertIsNone(
+            get_contact_reply("Which GitHub projects demonstrate his AI skills?")
         )
 
     def test_prompt_escapes_injection_and_redacts_private_values(self) -> None:

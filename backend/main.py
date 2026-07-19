@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 from gemini_client import (
     GeminiConfigurationError,
     generate_reply,
+    get_contact_reply,
     get_guardrail_reply,
 )
 from github_loader import GitHubLoaderError, load_github_documents
@@ -125,6 +126,10 @@ def chat(request: ChatRequest) -> ChatResponse:
     guardrail_reply = get_guardrail_reply(message)
     if guardrail_reply:
         return ChatResponse(reply=guardrail_reply)
+
+    contact_reply = get_contact_reply(message)
+    if contact_reply:
+        return ChatResponse(reply=contact_reply)
 
     try:
         search_query = _build_search_query(message, request.history)
