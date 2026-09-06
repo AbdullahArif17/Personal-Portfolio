@@ -73,9 +73,12 @@ def _build_search_query(message: str, history: list[HistoryMessage]) -> str:
 
 def _authorize_ingestion(x_ingest_key: str | None) -> None:
     configured_key = os.getenv("INGEST_API_KEY")
-    if configured_key and (
-        not x_ingest_key or not secrets.compare_digest(configured_key, x_ingest_key)
-    ):
+    if not configured_key:
+        raise HTTPException(
+            status_code=503,
+            detail="Ingestion is disabled: INGEST_API_KEY is not configured.",
+        )
+    if not x_ingest_key or not secrets.compare_digest(configured_key, x_ingest_key):
         raise HTTPException(status_code=401, detail="Invalid ingestion key.")
 
 

@@ -123,7 +123,7 @@ export default function About() {
           >
             <Image
               src="/me.jpg"
-              alt="Abdullah Arif portrait"
+              alt="Abdullah Arif - Full Stack Web Developer and MERN Stack Specialist"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover rounded-none group-hover:scale-[1.03] transition-transform duration-700"

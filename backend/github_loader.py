@@ -8,7 +8,7 @@ from typing import Any
 import httpx
 
 
-GITHUB_USERS = ("AbdullahArif17", "abdullahh-dev")
+GITHUB_USERS = ("AbdullahArif17",)
 GITHUB_API_URL = "https://api.github.com"
 
 

@@ -2,10 +2,10 @@ import { Loader2 } from "lucide-react";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-      <div className="text-center">
-        <Loader2 className="h-12 w-12 animate-spin text-blue-400 mx-auto mb-4" />
-        <p className="text-white text-lg">Loading...</p>
+    <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <Loader2 className="h-10 w-10 animate-spin text-[#8b5cf6] mx-auto" />
+        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">Loading...</p>
       </div>
     </div>
   );

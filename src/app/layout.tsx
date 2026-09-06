@@ -19,7 +19,7 @@ if (typeof globalThis !== "undefined" && !globalThis.window) {
   }
 }
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/analytics";
@@ -37,44 +37,80 @@ const geistMono = Roboto({
   weight: ["400", "700"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
+const siteUrl = "https://my-portfolio-nine-chi-62.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Abdullah Arif - Full Stack Web Developer",
-  description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies. Creating innovative web solutions with exceptional user experiences.",
-  keywords: ["Web Developer", "Full Stack", "React", "Next.js", "TypeScript", "Portfolio"],
-  authors: [{ name: "Abdullah Arif" }],
+  title: {
+    default: "Abdullah Arif | Full Stack Web Developer & MERN Specialist",
+    template: "%s | Abdullah Arif",
+  },
+  description:
+    "Abdullah Arif is a Full Stack Web Developer specializing in React, Next.js, TypeScript, and modern MERN stack applications. Explore featured projects, technical skills, and get in touch.",
+  keywords: [
+    "Abdullah Arif",
+    "Abdullah Arif Portfolio",
+    "Full Stack Web Developer",
+    "MERN Stack Developer",
+    "Next.js Developer",
+    "React Developer",
+    "TypeScript Developer",
+    "Node.js Developer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Web Developer Karachi",
+    "Web Developer Pakistan",
+    "JavaScript Developer",
+    "Freelance Software Engineer",
+  ],
+  authors: [{ name: "Abdullah Arif", url: siteUrl }],
   creator: "Abdullah Arif",
   publisher: "Abdullah Arif",
+  category: "technology",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://my-portfolio-nine-chi-62.vercel.app/'),
+  metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    title: "Abdullah Arif - Full Stack Web Developer",
-    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies.",
-    url: 'https://my-portfolio-nine-chi-62.vercel.app/',
-    siteName: 'Abdullah Arif Portfolio',
+    title: "Abdullah Arif | Full Stack Web Developer & MERN Specialist",
+    description:
+      "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN stack architectures. Creating scalable, high-performance digital experiences.",
+    url: siteUrl,
+    siteName: "Abdullah Arif Portfolio",
     images: [
       {
-        url: '/me.jpg',
+        url: "/me.jpg",
         width: 1200,
         height: 630,
-        alt: 'Abdullah Arif - Web Developer',
+        type: "image/jpeg",
+        alt: "Abdullah Arif - Full Stack Web Developer Portfolio",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Abdullah Arif - Full Stack Web Developer",
-    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies.",
-    images: ['/me.jpg'],
-    creator: '@your_twitter_handle',
+    card: "summary_large_image",
+    title: "Abdullah Arif | Full Stack Web Developer & MERN Specialist",
+    description:
+      "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies.",
+    images: [
+      {
+        url: "/me.jpg",
+        alt: "Abdullah Arif - Full Stack Web Developer",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -82,14 +118,63 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Abdullah Arif",
+      alternateName: "Abdullah Arif Developer",
+      url: siteUrl,
+      image: `${siteUrl}/me.jpg`,
+      jobTitle: "Full Stack Web Developer",
+      description:
+        "Full Stack Web Developer specializing in React, Next.js, TypeScript, Node.js, Express, and modern MERN architectures.",
+      sameAs: [
+        "https://github.com/AbdullahArif17",
+        "https://www.linkedin.com/in/abdullah-arif-89ab862b4/",
+        "https://www.facebook.com/rayan.arif.50",
+      ],
+      knowsAbout: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS",
+        "REST APIs",
+        "Full Stack Development",
+        "Artificial Intelligence",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Karachi",
+        addressCountry: "Pakistan",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Abdullah Arif - Full Stack Developer Portfolio",
+      description:
+        "Official portfolio of Abdullah Arif featuring full stack web development projects, skills, CV, and contact details.",
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+      inLanguage: "en-US",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -99,6 +184,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >

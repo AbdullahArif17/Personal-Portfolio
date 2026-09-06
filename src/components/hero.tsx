@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Code2, Download } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -196,10 +197,11 @@ export default function Hero() {
                 key={index}
                 className="inline-flex items-center gap-2 grayscale opacity-25 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={tech.src}
-                  alt={tech.name}
+                  alt={`${tech.name} logo`}
+                  width={28}
+                  height={28}
                   className="h-5 w-5 md:h-7 md:w-7 object-contain"
                 />
                 <span className="text-white text-[10px] md:text-xs font-semibold tracking-wider uppercase">

@@ -24,14 +24,6 @@ export default function Analytics() {
         page_path: pathname,
       });
     }
-
-    // Custom analytics tracking
-    const trackPageView = () => {
-      // You can add custom analytics here
-      console.log("Page viewed:", pathname);
-    };
-
-    trackPageView();
   }, [pathname]);
 
   return null;

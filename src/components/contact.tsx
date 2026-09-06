@@ -28,7 +28,7 @@ export default function Contact() {
         setMessage({ text: "Message sent successfully! I'll get back to you soon.", isError: false })
         e.currentTarget.reset()
       } else {
-        setMessage({ text: "Failed to send message. Please try again.", isError: true })
+        setMessage({ text: json.error || "Failed to send message. Please try again.", isError: true })
       }
     } catch {
       setMessage({ text: "An error occurred. Please try again later.", isError: true })

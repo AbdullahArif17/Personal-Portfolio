@@ -2,8 +2,7 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PATH="/home/user/.local/bin:${PATH}" \
-    HF_HOME="/home/user/.cache/huggingface"
+    PATH="/home/user/.local/bin:${PATH}"
 
 RUN useradd --create-home --uid 1000 user
 USER user
