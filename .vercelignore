@@ -1,0 +1,8 @@
+# Local dev agents & logs
+.agents/
+build-output.txt
+
+# Backend test runner & caches
+backend/tests/
+backend/__pycache__/
+*.pyc
